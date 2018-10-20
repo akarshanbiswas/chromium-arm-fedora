@@ -94,7 +94,6 @@ Source0:   chromium-%{version}-clean.tar.xz
 %endif
 # The following two source files are copied and modified from the chromium source
 Source10:  %{name}.sh 
-Source11:  %{name}.appdata.xml
 #Personal stuff
 Source15:  LICENSE
 # Enable support for widevine
@@ -565,8 +564,8 @@ mkdir -p %{buildroot}%{_datadir}/applications
 mkdir -p %{buildroot}%{_datadir}/gnome-control-center/default-apps
 sed -e "s|@@CHROMIUMDIR@@|%{chromiumdir}|" -e "s|@@BUILDTARGET@@|`cat /etc/redhat-release`|" \
     %{SOURCE10} > chromium-browser.sh
-install -m 755 chromium-browser.sh %{buildroot}%{_bindir}/%{name}
-install -m 644 %{SOURCE11} %{buildroot}%{_metainfodir}
+install -m 755 chromium-browser.sh %{buildroot}%{_bindir}/%{name}  
+install -m 644 chrome/installer/linux/common/%{name}.appdata.xml %{buildroot}%{_metainfodir}
 sed -e "s|@@MENUNAME@@|%{name}|g" -e "s|@@PACKAGE@@|%{name}|g" \
     chrome/app/resources/manpage.1.in > chrome.1
 install -m 644 chrome.1 %{buildroot}%{_mandir}/man1/%{name}.1
